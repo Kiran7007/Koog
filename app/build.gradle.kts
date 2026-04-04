@@ -59,7 +59,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-    implementation("androidx.appcompat:appcompat:1.7.0")
 
     implementation("ai.koog:koog-agents:0.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")

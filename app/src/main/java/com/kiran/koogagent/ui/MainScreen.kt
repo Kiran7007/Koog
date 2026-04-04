@@ -19,7 +19,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.kiran.koogagent.ChatMessage
 import com.kiran.koogagent.MainViewModel
-import kotlinx.coroutines.launch
 
 fun parseMarkdown(text: String): AnnotatedString = buildAnnotatedString {
     var remaining = text
@@ -51,8 +50,6 @@ fun MainScreen(viewModel: MainViewModel) {
     val messages by viewModel.messages.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val listState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
-
     LaunchedEffect(messages.size) {
         if (messages.isNotEmpty()) {
             listState.animateScrollToItem(messages.size - 1)
@@ -148,11 +145,6 @@ fun MainScreen(viewModel: MainViewModel) {
                         onClick = {
                             viewModel.submitQuery(queryText)
                             queryText = ""
-                            coroutineScope.launch {
-                                if (messages.isNotEmpty()) {
-                                    listState.animateScrollToItem(messages.size - 1)
-                                }
-                            }
                         },
                         enabled = !isLoading && queryText.isNotBlank(),
                         shape = RoundedCornerShape(24.dp),
